@@ -1,0 +1,13 @@
+{
+ "block.guaranteed_profit.slot_machine": "Slot Machine",
+ "item.guaranteed_profit.slot_machine": "Slot Machine",
+ "item.guaranteed_profit.crazy_slots": "Crazy Slots",
+ "item.guaranteed_profit.crazy_scythe": "Moonlight Scythe",
+ "item.guaranteed_profit.crazy_mace": "Blue Moon",
+ "item.guaranteed_profit.crazy_crossbow": "Arbalest",
+ "item.guaranteed_profit.crazy_trident": "Sea King",
+ "item.guaranteed_profit.crazy_axe": "Hand Axe",
+ "item.guaranteed_profit.crazy_sword": "Sword of Revival",
+ "item.guaranteed_profit.slot_spinner": "Slot Spinner",
+ "itemGroup.guaranteed_profit": "Guaranteed Profit"
+}

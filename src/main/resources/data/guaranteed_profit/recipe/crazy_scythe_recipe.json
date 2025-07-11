@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "guaranteed_profit:crazy_slots",
+    "minecraft:iron_hoe",
+    "minecraft:spider_eye",
+    "minecraft:bone"
+  ],
+  "result": {
+    "id": "guaranteed_profit:crazy_scythe"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "T": "minecraft:totem_of_undying",
+    "E": "minecraft:emerald",
+    "G": "minecraft:gold_ingot",
+    "L": "minecraft:lapis_lazuli",
+    "S": "guaranteed_profit:slot_spinner"
+  },
+  "pattern": [
+    " E ",
+    "LTL",
+    "GSG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "guaranteed_profit:crazy_slots"
+  }
+}
