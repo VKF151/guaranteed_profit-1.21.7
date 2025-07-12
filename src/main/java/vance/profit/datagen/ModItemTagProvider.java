@@ -31,5 +31,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
         valueLookupBuilder(ItemTags.HOES)
                 .add(ModItems.CRAZY_SCYTHE);
+
+        valueLookupBuilder(ItemTags.MACE_ENCHANTABLE)
+                .add(ModItems.CRAZY_MACE);
+
+        valueLookupBuilder(ItemTags.TRIDENT_ENCHANTABLE)
+                .add(ModItems.CRAZY_TRIDENT);
     }
 }

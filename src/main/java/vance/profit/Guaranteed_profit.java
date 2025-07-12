@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -14,6 +15,10 @@ import vance.profit.block.ModBlocks;
 import vance.profit.block.custom.entity.ModBlockEntities;
 import vance.profit.components.ModComponents;
 import vance.profit.item.ModItems;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Guaranteed_profit implements ModInitializer {
 	public static final String MOD_ID = "guaranteed_profit";
@@ -37,9 +42,28 @@ public class Guaranteed_profit implements ModInitializer {
 		UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
 			ItemStack stack = playerEntity.getMainHandStack();
 			ItemStack originalItem = stack.get(ModComponents.ORIGINALITEM);
+			Integer weaponId = stack.get(ModComponents.WEAPON_ID);
+			ItemEnchantmentsComponent weaponEnchants = stack.getEnchantments();
+
+
 			if (Boolean.TRUE.equals(stack.get(ModComponents.TRANSFORMABLE)) && !playerEntity.isSpectator()) {
 				if (playerEntity.isSneaking() && !playerEntity.isSwimming()) {
-						playerEntity.setStackInHand(hand, originalItem);
+
+					List<ItemEnchantmentsComponent> enchantsList = new ArrayList<>();
+					List<ItemEnchantmentsComponent> existing = stack.get(ModComponents.TRANSFORMABLE_ENCHANTS);
+					if (existing != null) {
+						enchantsList.addAll(existing);
+					}
+
+					if (weaponId != null && weaponEnchants != null) {
+						// Make sure weaponId is a valid index
+						if (weaponId >= 0 && weaponId <= enchantsList.size()) {
+							enchantsList.set(weaponId -1, weaponEnchants);
+						}
+					}
+					playerEntity.setStackInHand(hand, originalItem);
+					originalItem.set(ModComponents.TRANSFORMABLE_ENCHANTS, enchantsList);
+
 					world.playSound(null, playerEntity.getBlockPos(),
 							SoundEvents.BLOCK_AMETHYST_CLUSTER_BREAK, SoundCategory.PLAYERS,
 							0.35f, 1.0f);
@@ -47,6 +71,7 @@ public class Guaranteed_profit implements ModInitializer {
 			}
 			return ActionResult.PASS;
 		});
+
 
 
 
