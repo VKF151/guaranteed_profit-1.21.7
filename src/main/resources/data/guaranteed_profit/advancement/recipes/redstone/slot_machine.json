@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_planks": {
+    "has_diamond": {
       "conditions": {
         "items": [
           {
-            "items": "#minecraft:planks"
+            "items": "minecraft:diamond"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "guaranteed_profit:slot_machine"
+        "recipe": "guaranteed_profit:slot_machine_recipe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_planks"
+      "has_diamond"
     ]
   ],
   "rewards": {
     "recipes": [
-      "guaranteed_profit:slot_machine"
+      "guaranteed_profit:slot_machine_recipe"
     ]
   }
 }

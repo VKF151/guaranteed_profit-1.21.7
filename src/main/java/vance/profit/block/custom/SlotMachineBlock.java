@@ -78,22 +78,30 @@ public class SlotMachineBlock extends BlockWithEntity{
         ItemStack handStack = player.getStackInHand(hand);
 
         ItemStack storedStack = blockEntity.getStack(0);
-        if (!handStack.isEmpty() && handStack.getItem() == Items.DIAMOND) {
-
+        if (!handStack.isEmpty() && handStack.getItem() == Items.DIAMOND && !player.isSneaking()) {
             if (storedStack.isEmpty()) {
-                blockEntity.setStack(0, handStack.split(1));
-            } else if (storedStack.getCount() < storedStack.getMaxCount()) {
-                storedStack.increment(1);
-                handStack.decrement(1);
+                int insertAmount = Math.min(handStack.getCount(), handStack.getMaxCount());
+                blockEntity.setStack(0, handStack.split(insertAmount));
+            } else if (
+                    storedStack.getItem() == handStack.getItem() &&
+                            storedStack.getCount() < storedStack.getMaxCount()
+            ) {
+                int space = storedStack.getMaxCount() - storedStack.getCount();
+                int insertAmount = Math.min(handStack.getCount(), space);
+
+                if (insertAmount > 0) {
+                    storedStack.increment(insertAmount);
+                    handStack.decrement(insertAmount);
+                    blockEntity.setStack(0, storedStack);
+                }
             }
 
             blockEntity.markDirty();
             return ActionResult.SUCCESS;
         } else if (!handStack.isEmpty() && handStack.getItem() == ModItems.SLOT_SPINNER){
-            blockEntity.winGame(null, pos, world);
+            blockEntity.playGame(null, pos, world);
             if (!player.isInCreativeMode()) handStack.decrement(1);
         } else {
-
             if (!storedStack.isEmpty()) {
                 player.getInventory().offerOrDrop(storedStack.copy());
                 blockEntity.setStack(0, ItemStack.EMPTY);
